@@ -1,0 +1,38 @@
+name: Build 3DS CIA
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Instalar devkitPro
+        run: |
+          sudo apt update
+          sudo apt install -y wget
+          wget https://apt.devkitpro.org/install-devkitpro-pacman
+          chmod +x install-devkitpro-pacman
+          ./install-devkitpro-pacman
+
+      - name: 📦 Instalar ferramentas 3DS
+        run: |
+          sudo dkp-pacman -S 3ds-dev --noconfirm
+
+      - name: 🔨 Compilar projeto
+        run: make
+
+      - name: 📦 Criar CIA
+        run: |
+          makerom -f cia -o brpatch.cia -elf brpatch.elf
+
+      - name: 📤 Enviar CIA
+        uses: actions/upload-artifact@v3
+        with:
+          name: brpatch-cia
+          path: brpatch.cia
