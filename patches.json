@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Zelda Ocarina PT-BR",
+    "game": "0004000000033500",
+    "type": "translation",
+    "format": "xdelta",
+    "download": "https://seusite.com/zelda_ptbr.xdelta"
+  },
+  {
+    "name": "Mario Kart 7 Dublado",
+    "game": "0004000000030800",
+    "type": "dubbing",
+    "format": "bps",
+    "download": "https://seusite.com/mk7_dub.bps"
+  }
+]
