@@ -32,7 +32,7 @@ jobs:
           makerom -f cia -o brpatch.cia -elf brpatch.elf
 
       - name: 📤 Enviar CIA
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: brpatch-cia
           path: brpatch.cia
