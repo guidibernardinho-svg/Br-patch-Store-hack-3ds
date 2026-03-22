@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Clonar repositório
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 🛠️ Instalar devkitPro
+      - name: Setup devkitPro
         run: |
           sudo apt update
           sudo apt install -y wget
@@ -20,18 +20,17 @@ jobs:
           chmod +x install-devkitpro-pacman
           ./install-devkitpro-pacman
 
-      - name: 📦 Instalar ferramentas 3DS
+      - name: Install 3DS tools
         run: |
           sudo dkp-pacman -S 3ds-dev --noconfirm
 
-      - name: 🔨 Compilar projeto
+      - name: Build
         run: make
 
-      - name: 📦 Criar CIA
-        run: |
-          makerom -f cia -o brpatch.cia -elf brpatch.elf
+      - name: Create CIA
+        run: makerom -f cia -o brpatch.cia -elf brpatch.elf
 
-      - name: 📤 Enviar CIA
+      - name: Upload CIA
         uses: actions/upload-artifact@v4
         with:
           name: brpatch-cia
